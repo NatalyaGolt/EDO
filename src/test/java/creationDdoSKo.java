@@ -24,7 +24,7 @@ public class creationDdoSKo extends beforeAndAfter {
     private final By year23Locator = By.xpath("//*[contains(@class,'infoDocumentYears')]//span[text()='2023']");
 
     @Test
-    public void test1_MainPage_MenuPages_NamesAreCorrectAndOpened(){
+    public void ddoSKoHas23Year(){
 
         driver.navigate().to(urlMainPageEdoTest);
 
