@@ -1,16 +1,11 @@
 import Pages.*;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class TestCreationAndDeletionSvedenyaDdoSKo extends BeforeAndAfter {
 
     @Test
-    public void ddoSKo_SuccessfulCreationAndDeletion() throws InterruptedException {
-
-        var edo = new Pages.Autorization(driver, wait);
-        var docChoise = new Pages.NewDocumentCreationChoose(driver, wait);
-        var docFill = new FillSvedenyaDdoSKO(driver, wait);
-        var doc = new Pages.Desktop(driver, wait);
-        var docContextMenu = new Pages.DocContextMenu(driver, wait);
+    public void ddoSKo_SuccessfulCreation() {
 
 //        АВТОРИЗАЦИЯ
         edo.autorization();
@@ -20,12 +15,27 @@ public class TestCreationAndDeletionSvedenyaDdoSKo extends BeforeAndAfter {
         docFill.fillSvedenyaDdoSKo();
 //        СОХРАНЕНИЕ ДОКУМЕНТА
         docFill.docSave();
-//        ВОЗВРАТ К РАБОЧЕМУ СТОЛУ ДОКУМЕНТОВ
+//        ПРОВЕРКА НАЛИЧИЯ ДОКУМЕНТА В БД
+        Assert.assertTrue(dbQuery.findDdoSKoinDb(docFill.getDocMonth(), docFill.getDocYear()), "Документ не найден в БД");
+        //    ВОЗВРАТ К РАБОЧЕМУ СТОЛУ ДОКУМЕНТОВ
         docFill.backToDocList();
 //        ПРОВЕРКА НАЛИЧИЯ ДОКУМЕНТА НА РАБОЧЕМ СТОЛЕ
-        doc.docCreationAssert();
+//        doc.docCreationAssert();
+    }
+
+    @Test
+    public void ddoSKo_Assert() {
+        Assert.assertEquals(dbQuery.findInnOrganizationDdoSKoinDb(), "7830002078");
+    }
+
+    @Test(dependsOnMethods = "ddoSKo_SuccessfulCreation")
+    public void ddoSKo_SuccessfulDeletion() {
+
 //        УДАЛЕНИЕ ПОСЛЕДНЕГО СОХРАНЕННОГО ДОКУМЕНТА
         docContextMenu.delete();
+//        ПРОВЕРКА ОТСУТСТВИЯ ДОКУМЕНТА В БД
+        Assert.assertFalse(dbQuery.findDdoSKoinDb(FillSvedenyaDdoSKO.docMonth, FillSvedenyaDdoSKO.docYear), "Документ не удален из БД");
 
     }
+
 }

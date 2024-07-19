@@ -24,8 +24,8 @@ public class DocContextMenu {
     public WebElement deleteOption;
     @FindBy(xpath = "//*[contains(@class, 'swal2-icon-question')]//*[contains(@class, 'swal2-confirm')]")
     public WebElement submitDeletionButton;
-    @FindBy(xpath = "//*[contains(@id, 'swal2-content')]")
-    public WebElement waitModal;
+//    @FindBy(xpath = "//*[contains(@id, 'swal2-content')]")
+//    public WebElement waitModal;
 
     public void callContextMenu() {
         var actions = new Actions(driver);

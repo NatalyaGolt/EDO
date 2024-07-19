@@ -11,6 +11,10 @@ public class FillSvedenyaDdoSKO {
 
     public static final String comment = "some txt";
     public static final String validEmail = "ukt@ukt.ru";
+
+    public static String docMonth;
+    public static String docYear;
+
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -45,7 +49,6 @@ public class FillSvedenyaDdoSKO {
 //    @FindBy(xpath = "//*[contains(@class,'swal2-success')]")
 //    public WebElement modalWindowSuccessAction;
 
-
     public void fillEmail(){
         emailField.sendKeys(validEmail);
     }
@@ -56,20 +59,6 @@ public class FillSvedenyaDdoSKO {
     public void  backToDocList() {
         backToDocListButton.click();
     }
-
-    public String createdDocCdoc(){
-        return "Сведения о ДДО с КО № 7830002078/" + yearField.getText() + "/" + periodField.getText();
-    }
-
-    public static String docCdoc;
-
-    public void docSave() throws InterruptedException {
-        docCdoc = createdDocCdoc();
-        docSaveButton.click();
-        wait.until(ExpectedConditions.visibilityOf(saveDocumentModalWindow));
-        wait.until(ExpectedConditions.invisibilityOf(saveDocumentModalWindow));
-        Thread.sleep(1000);
-        }
 
     public void  fillSvedenyaDdoSKo() {
 
@@ -83,7 +72,39 @@ public class FillSvedenyaDdoSKO {
         selectInn.click();
 
         thirtyFieldComment.sendKeys(comment);
+    }
 
+//    public String createdDocCdoc(){
+//        return "Сведения о ДДО с КО № 7830002078/" + yearField.getText() + "/" + periodField.getText();
+//    }
+
+    public String getDocMonth(){
+        return docMonth = periodField.getText();
+    }
+
+    public String getDocYear(){
+        return docYear = yearField.getText();
+    }
+
+//    public static String docCdoc;
+
+    public void docSave() {
+//        docCdoc = createdDocCdoc();
+        getDocMonth();
+        getDocYear();
+        docSaveButton.click();
+        wait.until(ExpectedConditions.visibilityOf(saveDocumentModalWindow));
+        wait.until(ExpectedConditions.invisibilityOf(saveDocumentModalWindow));
+//        sleep(2000);
+    }
+
+    public void sleep(int i){
+        try {
+            Thread.sleep(i);
+        }
+        catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

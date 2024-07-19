@@ -22,22 +22,22 @@ public class Desktop {
     protected static final By shadowHostLocator = By.xpath("//left-nav");
     protected static final By buttonCreationDocumentLocator = By.cssSelector("#createDocumentButton");
 
-    @FindBy(xpath = "//*[contains(@class, 'loadTooltip')]")
-    public static WebElement loadDocumentList;
+//    @FindBy(xpath = "//*[contains(@class, 'loadTooltip')]")
+//    public static WebElement loadDocumentList;
     @FindBy(xpath = "//*[contains(@class, 'tabulator-table')]//div[contains(@class, 'tabulator-row')][1]//*[contains(@class, 'tabulator-cell')][2]")
     public static WebElement lastSavedDocCdoc;
 
-    public void waitForDocListLoading(){
-        wait.until(ExpectedConditions.invisibilityOf(Desktop.loadDocumentList));
-    }
+//    public void waitForDocListLoading(){
+//        wait.until(ExpectedConditions.invisibilityOf(Desktop.loadDocumentList));
+//    }
+//
+//    public String getLastSavedDocCdoc(){
+//        return lastSavedDocCdoc.getText();
 
-    public String getLastSavedDocCdoc(){
-        return lastSavedDocCdoc.getText();
-    }
-
-    public void docCreationAssert(){
-        waitForDocListLoading();
-        Assert.assertEquals(FillSvedenyaDdoSKO.docCdoc, getLastSavedDocCdoc(), "Последний сохраненный документ не отображается на рабочем столе");
-    }
+//    проверка существования документа на фронте
+//    public void docCreationAssert(){
+//        waitForDocListLoading();
+//        Assert.assertEquals(FillSvedenyaDdoSKO.docCdoc, getLastSavedDocCdoc(), "Последний сохраненный документ не отображается на рабочем столе");
+//    }
 
 }

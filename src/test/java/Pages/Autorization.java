@@ -25,6 +25,7 @@ public class Autorization {
 
     protected String login = "7830002078";
     protected String password = "7830002078";
+
     @FindBy(xpath = "//button[contains(@class,'align-items-center')]")
     public WebElement buttonEnter;
     @FindBy(xpath = "//*[contains(@id, 'login-modal')]//*[@id = 'login']")

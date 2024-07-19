@@ -17,9 +17,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class BeforeAndAfter {
+    
     protected static ChromeOptions options = new ChromeOptions();
     protected static WebDriver driver;
     protected static WebDriverWait wait;
+
+    protected Pages.Autorization edo;
+    protected Pages.NewDocumentCreationChoose docChoise;
+    protected Pages.FillSvedenyaDdoSKO docFill;
+    protected Pages.Desktop doc;
+    protected Pages.DocContextMenu docContextMenu;
+    protected Pages.DatabaseQuery dbQuery;
 
     @BeforeTest
     public void setUp(){
@@ -27,6 +35,13 @@ public class BeforeAndAfter {
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
+        edo = new Pages.Autorization(driver, wait);
+        docChoise = new Pages.NewDocumentCreationChoose(driver, wait);
+        docFill = new Pages.FillSvedenyaDdoSKO(driver, wait);
+        doc = new Pages.Desktop(driver, wait);
+        docContextMenu = new Pages.DocContextMenu(driver, wait);
+        dbQuery = new Pages.DatabaseQuery();
     }
 
     @AfterTest
